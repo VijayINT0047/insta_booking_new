@@ -22,28 +22,29 @@ const plan = asyncHandler(async(req, res) => {
 
 
 // conver string to array to filed which are array in schema    
-    const processImage = image_list 
-                            ? typeof image_list === "string" 
-                                ? image_list.split(',').map(i => i.trim())
-                                : Array.isArray(image_list) 
-                                    ? image_list 
-                                    : []
+    const processImages = Array.isArray(image_list)
+                          ? image_list.map(i => String(i).trim()).filter(i => i.startsWith("https://") || i.startsWith("http://"))
+                          : typeof image_list === "string"
+                            ? image_list.split(",").map(i => i.trim()).filter(i => i.startsWith("https://") || i.startsWith("http://"))
                             : [];
-    const processPlanCuppon = plan_coupon
-                                ? typeof plan_coupon === "string" 
-                                    ? plan_coupon.split(',').map(i => i.trim())
-                                    : Array.isArray(plan_coupon) 
-                                        ? plan_coupon 
-                                        : []
-                                : [];
+    const processPlanCuppon = Array.isArray(plan_coupon)
+                          ? plan_coupon.map(i => String(i).trim().toUpperCase()).filter(i => i.length>0 )
+                          : typeof plan_coupon === "string"
+                            ? plan_coupon.split(",").map(i => i.trim().toUpperCase()).filter(i => i.length>0 )
+                            : [];
 
 
     const processSubpackages = subpackages.map(sub => ({
         ...sub,
-        adult_activities : typeof sub.adult_activities==="string"? sub.adult_activities.split(',').map(i => i.trim()): sub.adult_activities || [],
-        child_activities : typeof sub.child_activities==="string"? sub.child_activities.split(',').map(i => i.trim()): sub.child_activities || [],
-        addOn : typeof sub.addOn==="string"? sub.addOn.split(',').map(i => i.trim()): sub.addOn || [],
-        facilities : typeof sub.facilities==="string"? sub.facilities.split(',').map(i => i.trim()): sub.facilities || []
+        adult_activities: Array.isArray(sub.adult_activities) ? sub.adult_activities.map(i => String(i).trim()).filter(i => i.length>0): typeof(sub.adult_activities) === "string"? sub.adult_activities.split(',').map(i => i.trim()).filter(i => i.length>0) : [],
+        child_activities: Array.isArray(sub.child_activities) ? sub.child_activities.map(i => String(i).trim()).filter(i => i.length>0): typeof(sub.child_activities) === "string"? sub.child_activities.split(',').map(i => i.trim()).filter(i => i.length>0) : [],
+        addOn: Array.isArray(sub.addOn) ? sub.addOn.map(i => String(i).trim()).filter(i => i.length>0): typeof(sub.addOn) === "string"? sub.addOn.split(',').map(i => i.trim()).filter(i => i.length>0) : [],
+        facilities: Array.isArray(sub.facilities) ? sub.facilities.map(i => String(i).trim()).filter(i => i.length>0): typeof(sub.facilities) === "string"? sub.facilities.split(',').map(i => i.trim()).filter(i => i.length>0) : [],
+        
+        // adult_activities : typeof sub.adult_activities==="string"? sub.adult_activities.split(',').map(i => i.trim()): sub.adult_activities || [],
+        // sub.child_activities : typeof sub.child_activities==="string"? sub.child_activities.split(',').map(i => i.trim()): sub.child_activities || [],
+        // sub.addOn : typeof sub.addOn==="string"? sub.addOn.split(',').map(i => i.trim()): sub.addOn || [],
+        // sub.facilities : typeof sub.facilities==="string"? sub.facilities.split(',').map(i => i.trim()): sub.facilities || []
     }))
 
     let processMaxAdult = maxAdults
