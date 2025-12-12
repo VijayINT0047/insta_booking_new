@@ -9,7 +9,7 @@ const planSchema = new mongoose.Schema({
     fromtime: { type: String, required: true },
     totime: { type: String, required: true },
   },
-  image_list: { type: [String], default: [] },
+  image_list: { type: [mongoose.Schema.Types.ObjectId],ref: "plan_package", default: [] },
   plan_coupon: { type: [String], default: [] },
   Planpackages: { type: [mongoose.Schema.Types.ObjectId], ref: "plan_package" },
   adult_age_renge: {

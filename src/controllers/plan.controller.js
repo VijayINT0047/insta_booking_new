@@ -109,7 +109,7 @@ const getPlanByTitle = asyncHandler(async (req, res) => {
   const { title } = req.query;
   if (!title)
     throw new ApiError(401, MESSAGE_TEMPLATES.MISSING_FIELDS("Title"));
-  const plan = await Plan.findOne({ title }).populate("plan_package");
+  const plan = await Plan.findOne({ title }).populate("plan_package").populate("Image");
 
   if (!plan) throw new ApiError(404, MESSAGE_TEMPLATES.NOT_FOUND("Plan"));
   const planResponse = plan.toObject();

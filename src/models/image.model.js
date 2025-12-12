@@ -7,8 +7,8 @@ const imageSchema = new mongoose.Schema({
     description : {
         type: String
     },
-    images:{
-        type: [String],
+    imagesURL:{
+        type: String,
         required: true,
         default: []
     }
