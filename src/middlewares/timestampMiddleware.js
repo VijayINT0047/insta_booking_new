@@ -1,4 +1,4 @@
-const getISTTime = require("../utils/getISTTime");
+const {getISTTime} = require("../utils/ISDtime");
 
 function applyTimestamps(schema) {
   

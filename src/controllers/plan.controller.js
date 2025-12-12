@@ -17,7 +17,6 @@ const createPlan = asyncHandler(async (req, res) => {
     image_list,
     plan_coupon,
     Planpackages,
-    map,
     adult_age_renge,
     child_age_renge,
     status,
@@ -32,8 +31,8 @@ const createPlan = asyncHandler(async (req, res) => {
     !timing ||
     !timing?.fromtime ||
     !timing?.totime ||
-    !Array.isArray(subpackages) ||
-    subpackages.length === 0
+    !Array.isArray(Planpackages) ||
+    Planpackages.length === 0
   )
     throw new ApiError(404, MESSAGE_TEMPLATES.MISSING_FIELDS("some fields"));
 
@@ -86,8 +85,7 @@ const createPlan = asyncHandler(async (req, res) => {
     timing,
     image_list: processImage,
     plan_coupon: processPlanCuppon,
-    subpackages: processSubpackages,
-    map,
+    subpackages: processPlanPackage,
     adult_age_renge: adult_age_renge,
     child_age_renge: child_age_renge,
     status:status,
