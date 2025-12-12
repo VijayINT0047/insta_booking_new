@@ -1,0 +1,9 @@
+[33medf22a4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdeveloper[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m1b56bd6[m HEAD@{1}: commit (merge): [200~feat(middleware): add IST timestamp conversion middleware
+[33medf22a4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdeveloper[m[33m)[m HEAD@{2}: commit: fdsfdsfa
+[33m67d3f97[m HEAD@{3}: commit: new change
+[33m3887935[m HEAD@{4}: pull origin developer: Fast-forward
+[33mcc9369a[m HEAD@{5}: commit: new commit
+[33mb517f17[m HEAD@{6}: checkout: moving from main to developer
+[33m9a36ee7[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{7}: pull: Fast-forward
+[33mb6f1fff[m[33m ([m[1;31morigin/pre-main[m[33m, [m[1;31morigin/dev-vijay[m[33m)[m HEAD@{8}: clone: from github.com:VijayINT0047/insta_booking_new.git

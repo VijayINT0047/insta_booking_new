@@ -1,42 +1,47 @@
- const mongoose = require("mongoose")
- 
+const { required } = require("joi");
+const mongoose = require("mongoose");
+const applyTimestamps = require("../middlewares/timestampMiddleware");
+
 const planSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    timing: {
-        fromtime: {type: String, required:true},
-        totime: {type: String, required: true},
-    },
-    image_list: { type: [String],  default:[]},
-    plan_coupon: {type: [String], default: []},
-    subpackages:  [ 
-        {
-            name: {type: String, required: true},
-            adultPrice: {type: Number},
-            childPrice: {type: Number},
-            adult_activities: {type: [String], default:[]},
-            child_activities: {type: [String], default : []},
-            addOn: {type: [String], default: []},
-            facilities: {type: [String], default: []},
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  timing: {
+    fromtime: { type: String, required: true },
+    totime: { type: String, required: true },
+  },
+  image_list: { type: [mongoose.Schema.Types.ObjectId],ref: "plan_package", default: [] },
+  plan_coupon: { type: [String], default: [] },
+  Planpackages: { type: [mongoose.Schema.Types.ObjectId], ref: "plan_package" },
+  adult_age_renge: {
+    type: Number,
+    required: true,
+    min: 11,
+    max: 100,
+  },
+  child_age_renge: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 10,
+  },
+  status: {
+    type: Number,
+    required: true,
+    enum: ["open", "temporary closed", "closed"],
+    default: "open",
+  },
+  gstPercentage: {
+    type: Number,
+    default: 18,
+  },
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
+    type: Date,
+  },
+});
 
-        }
-    ],
-    map: { type: String },
-    maxAdults: { type: String },
-    maxYouth: { type: String },
-    // createdAt: {type: Date},
-    // priceAdult: { type: Number, required: true }, // it will be in sub plan
-    // priceChild: { type: Number, required: true }, // it will be in sub plan
-    // date: { type: String, required: true },
-    // time: { type: String, required: true },
-    // location: { type: String, required: true },
-    // venue: { type: String, required: true },
-    // tags: { type: [String], required: true},
-    // seatsAvailable: { type: Number, required: true }, // it will be in sub plan of movie
-    // duration: { type: String, required: true },  // it will be in sub plan of movie
-    // language: { type: String, required: true },   // it will be in sub plan of movie
-    // rating: { type: String, required: true },
-    // terms: { type: String, required: true },
-}, {timestamps: true})
+applyTimestamps(planSchema);
 
-module.exports = mongoose.model ("Plan", planSchema)
+module.exports = mongoose.model("Plan", planSchema);
