@@ -2,7 +2,7 @@ const { required } = require("joi");
 const mongoose = require("mongoose");
 const applyTimestamps = require("../middlewares/timestampMiddleware");
 
-const subplanSchema = new mongoose.Schema({
+const planpackageSchema = new mongoose.Schema({
   name: { type: String, required: true },
   adultPrice: { type: Number, required: true },
   childPrice: { type: Number, required: true },
@@ -20,6 +20,6 @@ const subplanSchema = new mongoose.Schema({
   },
 });
 
-applyTimestamps(subplanSchema);
+applyTimestamps(planpackageSchema);
 
 module.exports = mongoose.model("plan_package", planpackageSchema);
